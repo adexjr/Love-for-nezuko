@@ -45,6 +45,7 @@ for (let i = 0; i < TOTAL_WORDS; i++) {
     span.className = "love";
 
     span.innerText = "I love you";
+    span.style.opacity = "0";
 
     span.style.left = Math.random() * innerWidth + "px";
 
@@ -96,3 +97,20 @@ window.addEventListener("resize", () => {
         buildHeart();
     }
 });
+const delay = index * 12; // milliseconds between each word
+
+setTimeout(() => {
+
+    particle.style.transition = `
+        left 6s ease,
+        top 6s ease,
+        transform 6s ease,
+        opacity 1.5s ease
+    `;
+
+    particle.style.left = (centerX + point.x) + "px";
+    particle.style.top = (centerY + point.y) + "px";
+    particle.style.transform = "translate(-50%, -50%)";
+    particle.style.opacity = "1";
+
+}, delay);
