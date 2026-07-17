@@ -49,3 +49,44 @@ for (let i = 0; i < TOTAL_WORDS; i++) {
     particles.push(span);
 
       }
+// =========================
+// Part 2 - Build the Heart
+// =========================
+
+function buildHeart() {
+
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    particles.forEach((particle, index) => {
+
+        const point = heartPoints[index % heartPoints.length];
+
+        particle.style.transition = `
+            left ${BUILD_TIME / 1000}s ease,
+            top ${BUILD_TIME / 1000}s ease,
+            transform ${BUILD_TIME / 1000}s ease
+        `;
+
+        particle.style.left = (centerX + point.x) + "px";
+        particle.style.top = (centerY + point.y) + "px";
+        particle.style.transform = "translate(-50%, -50%)";
+
+    });
+
+    // Show Nezuko after the heart has formed
+    setTimeout(() => {
+        name.classList.add("show");
+    }, BUILD_TIME);
+
+}
+
+// Start building after a short delay
+setTimeout(buildHeart, 1000);
+
+// Re-center the heart if the screen size changes
+window.addEventListener("resize", () => {
+    if (name.classList.contains("show")) {
+        buildHeart();
+    }
+});
